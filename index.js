@@ -9,12 +9,11 @@ import { loadStdlib } from '@reach-sh/stdlib';
 const reach = loadStdlib(process.env);
 
 
-import {ALGO_MyAlgoConnect as MyAlgoConnect}
-    from '@reach-sh/stdlib';
+import {ALGO_MyAlgoConnect as MyAlgoConnect} from '@reach-sh/stdlib';
 reach.setWalletFallback(reach.walletFallback({
     providerEnv: 'TestNet',MyAlgoConnect}));
 
-const fingerToInt = {'ZERO':0,'ONE':1,'TWO':2,'THREE':3,'FOUR':4,'FIVE':5};
+const clawToInt = {'ZERO':0,'ONE':1,'TWO':2,'THREE':3,'FOUR':4,'FIVE':5};
 const guessToInt = {'ZEROO':0,'ONEO':1,'TWOO':2,'THREEO':3,'FOURO':4,'FIVEO':5,'SIXO':6,'SEVENO':7,'EIGHTO':8,'NINEO':9,'TENO':10};
 const intToOutcome = ['Alice wins','Draw','Bob wins'];
 const {standardUnit} = reach;
@@ -50,13 +49,6 @@ class Player extends React.Component{
     random(){return reach.hasRandom.random();}
 
 
-    async getFinger(){
-        const hand = await new Promise(resolveHandP =>{
-            this.setState({view:'GetFinger',playable: true,resolveHandP});
-        });
-        this.setState({view:'WaitingForResults',finger});
-        return handToInt[finger];
-    }
     async getGuess(){
         const guess = await new Promise(resolveGuessP => {
             this.setState({view:'GetGuess', playable:true, resolveGuessP});
@@ -64,9 +56,17 @@ class Player extends React.Component{
         this.setState({view:'WaitingForResults', guess});
         return guessToInt[guess];
     }
+
+    async getClaw(){
+      const claw = await new Promise(resolveClawP =>{
+          this.setState({view:'GetClaw',playable: true,resolveClawP});
+      });
+      this.setState({view:'WaitingForResults',claw});
+      return clawToInt[claw];
+   }
     seeOutcome(i){this.setState({view:'Done',outcome:intToOutcome[i]});}
     informTimeout(){this.setState({view:'Timeout'});}
-    playHand(finger){this.state.resolveHandP(finger);}
+    playClaw(claw){this.state.resolveHandP(claw);}
     playGuess(guess){this.state.resolveGuessP(guess);}
 }
 

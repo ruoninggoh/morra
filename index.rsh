@@ -10,7 +10,8 @@ const winner = (fingersA, fingersB, guessA, guessB) => {
    {
     const myoutcome = DRAW; 
     return myoutcome;
-} else {
+}
+ else {
   if ( ((fingersA + fingersB) == guessA ) ) {
     const myoutcome = A_WINS;
     return myoutcome;
@@ -48,9 +49,8 @@ forall(UInt, (fingerA) =>
 
 const Player =
       { ...hasRandom,
-        getFinger: Fun([], UInt),
+        getClaw: Fun([], UInt),
         getGuess: Fun([], UInt),
-        seeWinning: Fun([UInt], Null),
         seeOutcome: Fun([UInt], Null) ,
         informTimeout: Fun([], Null)
        };
@@ -93,29 +93,25 @@ export const main=
       while ( outcome == DRAW ) {
         commit();
         A.only(() => {    
+          const _fingersA = interact.getClaw();
           const _guessA = interact.getGuess(); 
-          const _fingersA = interact.getFinger();
- 
+          
+
           const [_commitA, _saltA] = makeCommitment(interact, _fingersA);
           const commitA = declassify(_commitA);        
           const [_guessCommitA, _guessSaltA] = makeCommitment(interact, _guessA);
           const guessCommitA = declassify(_guessCommitA);   
       });
      
-        A.publish(commitA)
-          .timeout(relativeTime(deadline), () => closeTo(B, informTimeout));
-        commit();    
+      A.publish(commitA, guessCommitA)
+      commit();
 
-        A.publish(guessCommitA)
-          .timeout(relativeTime(deadline), () => closeTo(B, informTimeout));
-          ;
-        commit();
-        unknowable(B, A(_fingersA, _saltA));
-        unknowable(B, A(_guessA, _guessSaltA));
+      unknowable(B, A(_fingersA, _saltA));
+      unknowable(B, A(_guessA, _guessSaltA));
 
         B.only(() => {
 
-          const fingersB = declassify(interact.getFinger()); 
+          const fingersB = declassify(interact.getClaw()); 
           const guessB = declassify(interact.getGuess());  
           });
 
@@ -125,9 +121,9 @@ export const main=
         B.publish(guessB)
           .timeout(relativeTime(deadline), () => closeTo(A, informTimeout));
           
-        
         commit();
 
+        
         A.only(() => {
           const [saltA, fingersA] = declassify([_saltA, _fingersA]); 
           const [guessSaltA, guessA] = declassify([_guessSaltA, _guessA]); 

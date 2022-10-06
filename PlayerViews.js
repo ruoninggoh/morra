@@ -2,42 +2,39 @@ import React from 'react';
 
 const exports = {};
 
-// Player views must be extended.
-// It does not have its own Wrapper view.
-
-exports.GetHand = class extends React.Component {
+exports.GetClaw = class extends React.Component {
   render() {
     const {parent, playable, hand} = this.props;
     return (
       <div>
-        {hand ? 'It was a draw! Pick again.' : ''}
+        {claw ? 'It was a draw! Pick again.' : ''}
         <br />
         {!playable ? 'Please wait...' : 'Pick a number'}
         <br />
         <button
           disabled={!playable}
-          onClick={() => parent.playHand('ZERO')}
-        >Zero</button>
+          onClick={() => parent.playClaw('ZERO')}
+        >ZERO</button>
         <button
           disabled={!playable}
-          onClick={() => parent.playHand('ONE')}
-        >One</button>
+          onClick={() => parent.playClaw('ONE')}
+        >ONE</button>
         <button
           disabled={!playable}
-          onClick={() => parent.playHand('TWO')}
-        >Two</button>
+          onClick={() => parent.playClaw('TWO')}
+        >TWO</button>
         <button
           disabled={!playable}
-          onClick={() => parent.playHand('THREE')}
-        >Three</button>
+          onClick={() => parent.playClaw('THREE')}
+        >THREE</button>
         <button
           disabled={!playable}
-          onClick={() => parent.playHand('FOUR')}
-        >Four</button>
+          onClick={() => parent.playClaw('FOUR')}
+        >FOUR</button>
         <button
           disabled={!playable}
-          onClick={() => parent.playHand('FIVE')}
-        >Five</button>
+          onClick={() => parent.playClaw('FIVE')}
+        >FIVE</button>
       </div>
     );
   }
@@ -45,7 +42,7 @@ exports.GetHand = class extends React.Component {
 
 exports.GetGuess = class extends React.Component {
   render() {
-    const {parent, playable, hand} = this.props;
+    const {parent, playable, guess} = this.props;
     return (
       <div>
         {hand ? 'It was a draw! Pick again.' : ''}
@@ -54,48 +51,48 @@ exports.GetGuess = class extends React.Component {
         <br />
         <button
           disabled={!playable}
-          onClick={() => parent.playGuess('ZERO')}
-        >0</button>
+          onClick={() => parent.playGuess('ZEROO')}
+        >ZERO</button>
         <button
           disabled={!playable}
-          onClick={() => parent.playGuess('ONE')}
-        >1</button>
+          onClick={() => parent.playGuess('ONEO')}
+        >ONE</button>
         <button
           disabled={!playable}
-          onClick={() => parent.playGuess('TWO')}
-        >2</button>
-            <button
+          onClick={() => parent.playGuess('TWOO')}
+        >TWO</button>
+        <button
           disabled={!playable}
-          onClick={() => parent.playGuess('THREE')}
-        >3</button>
-            <button
+          onClick={() => parent.playGuess('THREEO')}
+        >THREE</button>
+        <button
           disabled={!playable}
-          onClick={() => parent.playGuess('FOUR')}
-        >4</button>
-          <button
+          onClick={() => parent.playGuess('FOURO')}
+        >FOUR</button>
+        <button
           disabled={!playable}
-          onClick={() => parent.playGuess('FIVE')}
-        >5</button>
-            <button
+          onClick={() => parent.playGuess('FIVEO')}
+        >FIVE</button>
+        <button
           disabled={!playable}
-          onClick={() => parent.playGuess('SIX')}
-        >6</button>
-            <button
+          onClick={() => parent.playGuess('SIXO')}
+        >SIX</button>
+        <button
           disabled={!playable}
-          onClick={() => parent.playGuess('SEVEN')}
-        >7</button>
-            <button
+          onClick={() => parent.playGuess('SEVENO')}
+        >SEVEN</button>
+        <button
           disabled={!playable}
-          onClick={() => parent.playGuess('EIGHT')}
-        >8</button>
-            <button
+          onClick={() => parent.playGuess('EIGHTO')}
+        >EIGHT</button>
+        <button
           disabled={!playable}
-          onClick={() => parent.playGuess('NINE')}
-        >9</button>
-            <button
+          onClick={() => parent.playGuess('NINEO')}
+        >NINE</button>
+        <button
           disabled={!playable}
-          onClick={() => parent.playGuess('TEN')}
-        >10</button>
+          onClick={() => parent.playGuess('TENO')}
+        >TEN</button>
       </div>
     );
   }
